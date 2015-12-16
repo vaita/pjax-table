@@ -156,8 +156,14 @@ EditableDropdownPlugin.prototype._saveChanges = function($selectedItem, record) 
 
 EditableDropdownPlugin.prototype._updateLabel = function($selectedItem) {
   var $label = this._$el.find('.dropdown-label');
-  var newSelection = $selectedItem.find('a').html();
-  $label.html(newSelection);
+  var $link = $selectedItem.find('a');
+  var $icon = $link.children('i');
+
+  if ($icon.length) {
+    $label.html($icon.clone());
+  } else {
+    $label.html($link.html());
+  }
 };
 
 EditableDropdownPlugin.prototype._onPluginSaveSuccess = function(e, data) {
